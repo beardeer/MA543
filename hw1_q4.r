@@ -1,7 +1,7 @@
 # (a)
 
 library(ISLR)
-college <- read.csv("College.csv")
+college = read.csv("College.csv")
 
 # (b)
 
