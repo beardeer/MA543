@@ -1,6 +1,5 @@
 # (a)
 
-library(ISLR)
 college = read.csv("College.csv")
 
 # (b)
@@ -32,3 +31,8 @@ hist(college$Accept)
 hist(college$Enroll)
 hist(college$Outstate)
 # vi
+summary(college)
+summary(college$Grad.Rate)
+high_rate = college[college$Grad.Rate > 100, ]
+nrow(high_rate)
+high_rate
