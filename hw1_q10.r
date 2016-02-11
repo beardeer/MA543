@@ -1,12 +1,13 @@
 # (a)
 library(ISLR)
 auto = ISLR::Auto
-pairs(Auto)
+summary(auto)
+pairs(auto)
 
 # (b)
 
 names(auto)
-cor(auto[1:8])
+cor(auto[, -c(2, 8, 9)])
 
 
 # (c)
