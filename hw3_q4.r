@@ -71,3 +71,9 @@ pcr.test.r2 = 1 - mean((College.test[, "Apps"] - data.frame(pcr.pred))^2) /mean(
 pls.test.r2 = 1 - mean((College.test[, "Apps"] - data.frame(pls.pred))^2) /mean((College.test[, "Apps"] - test.avg)^2)
 barplot(c(lm.test.r2, ridge.test.r2, lasso.test.r2, pcr.test.r2, pls.test.r2), names.arg=c("LR", "Ridge", "Lasso", "PCR", "PLS"), main="Test R2")
 
+lm.test.r2
+ridge.test.r2
+lasso.test.r2
+pcr.test.r2
+pls.test.r2
+
