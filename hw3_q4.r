@@ -15,7 +15,7 @@ summary(College.test)
 # b
 lm.fit = lm(Apps~., data=College.train)
 lm.pred = predict(lm.fit, College.test)
-mean((College.test[, "Apps"] - lm.pred)^2)
+lm.mse = mean((College.test[, "Apps"] - lm.pred)^2)
 
 # c
 library(glmnet)
@@ -28,7 +28,7 @@ lambda.best = mod.ridge$lambda.min
 lambda.best
 
 ridge.pred = predict(mod.ridge, newx=test.mat, s=lambda.best)
-mean((College.test[, "Apps"] - ridge.pred)^2)
+ridge.mse = mean((College.test[, "Apps"] - ridge.pred)^2)
 
 # d
 
@@ -37,7 +37,7 @@ lambda.best = mod.lasso$lambda.min
 lambda.best
 
 lasso.pred = predict(mod.lasso, newx=test.mat, s=lambda.best)
-mean((College.test[, "Apps"] - lasso.pred)^2)
+lasso.mse = mean((College.test[, "Apps"] - lasso.pred)^2)
 
 mod.lasso = glmnet(model.matrix(Apps~., data=College), College[, "Apps"], alpha=1)
 predict(mod.lasso, s=lambda.best, type="coefficients")
@@ -50,7 +50,7 @@ pcr.fit = pcr(Apps~., data=College.train, scale=T, validation="CV")
 validationplot(pcr.fit, val.type="MSEP")
 
 pcr.pred = predict(pcr.fit, College.test, ncomp=10)
-mean((College.test[, "Apps"] - data.frame(pcr.pred))^2)
+pcr.mse = mean((College.test[, "Apps"] - data.frame(pcr.pred))^2)
 
 
 # f
@@ -59,7 +59,7 @@ pls.fit = plsr(Apps~., data=College.train, scale=T, validation="CV")
 validationplot(pls.fit, val.type="MSEP")
 
 pls.pred = predict(pls.fit, College.test, ncomp=10)
-mean((College.test[, "Apps"] - data.frame(pls.pred))^2)
+pls.mse = mean((College.test[, "Apps"] - data.frame(pls.pred))^2)
 
 # g
 
@@ -76,4 +76,6 @@ ridge.test.r2
 lasso.test.r2
 pcr.test.r2
 pls.test.r2
+
+barplot(c(lm.mse, ridge.mse, lasso.mse, pcr.mse, pls.mse), names.arg=c("LR", "Ridge", "Lasso", "PCR", "PLS"), main="Test MSE")
 

@@ -11,7 +11,7 @@ beta0 = 1
 beta1 = 2
 beta2 = 3
 beta3 = 4
-y = beta0 + beta1 * X + beta2 * X^2 + beta3 * X^3 + eps
+y = beta0 + beta1 * x + beta2 * x^2 + beta3 * x^3 + eps
 
 plot(x, y)
 
@@ -42,7 +42,7 @@ points(which.min(reg.summary.fwd$bic), reg.summary.fwd$bic[which.min(reg.summary
 plot(reg.summary.fwd$adjr2, xlab = "Number of variables", ylab = "Adjusted R^2", type = "l")
 points(which.max(reg.summary.fwd$adjr2), reg.summary.fwd$adjr2[which.max(reg.summary.fwd$adjr2)], col = "red", cex = 2, pch = 20)
 
-coef(regfit.full, which.max(reg.summary$adjr2))
+coef(regfit.fwd, which.max(reg.summary.fwd$adjr2))
 
 regfit.bwd = regsubsets(y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5) + I(x^6) + I(x^7) + I(x^8) + I(x^9) + I(x^10), data = data.full, nvmax = 10, method = "backward")
 reg.summary.bwd = summary(regfit.bwd)
